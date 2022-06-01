@@ -1,0 +1,84 @@
+<div class="banneroffers">
+</div>
+
+<div class="tutoringbody">
+  <div class="ui container">
+    <div *ngIf="!isLoggedIn()" class="ui negative floating message">
+      Melde dich an, um Termine buchen zu können!
+    </div>
+
+    <h2>{{offer.title }}</h2>
+    <div class="ui piled segment">
+      <h4 class="ui header">Beschreibung:</h4>
+      <p>{{offer.description}}</p>
+    </div>
+    <h3>Dich begleitet: {{offer?.user?.firstName}} {{offer?.user?.lastName}}</h3>
+    <div class="ui grid">
+      <div class="four wide column">
+        <img src="{{offer?.user?.url}}" class="round2">
+      </div>
+      <div class="twelve wide column">
+        <div class="ui segment">
+          <p><b>Zum Tutor:</b></p>
+          <p>{{offer?.user?.information}}</p>
+          <p><b>Kontaktdaten:</b></p>
+          <p>E-Mail: {{offer?.user?.email}}</p>
+          <p>Telefonnummer: {{offer?.user?.phonenumber}}</p>
+        </div>
+      </div>
+      <div class="three wide column">
+      </div>
+    </div>
+
+    <div class="cont">
+      <h3 class="ui header">Verfügbare Termine:</h3>
+
+      <div class="ui middle aligned celled list">
+        <div *ngFor="let appointment of offer.appointments" class="item bs-appointment"
+             [appointment]="appointment" [offer]="offer">
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isLoggedIn() && user.role === 0 || user.role === 1  && offer.user_id === user.id" class="cont">
+      <h3>Nachrichten:</h3>
+
+      <div class="ui middle aligned divided list">
+        <div *ngFor="let message of messages" class="item bs-message"
+             [message]="message" [offer]="offer"></div>
+        <p *ngIf="messages && !messages.length">Derzeit gibt es keine Nachrichten zu dem Angebot</p>
+      </div>
+    </div>
+
+
+    <form *ngIf="isLoggedIn() && user.role === 0" class="ui large form" [formGroup]="messageForm"
+          (ngSubmit)="submitForm()">
+      <input type="hidden" formControlName="id">
+      <div class="field">
+        <label>Deine Nachricht</label>
+        <textarea formControlName="text" rows="1"></textarea>
+      </div>
+      <button type="submit" class="ui green button">Senden</button>
+    </form>
+
+
+    <div *ngIf="isLoggedIn() && user.role === 1 && offer.user_id === user.id">
+      <button [routerLink]="'..'" class="ui orange button">Zurück zur Übersicht</button>
+      <button class="ui yellow labeled icon button"
+              [routerLink]="['/admin', offer?.id]">
+        <i class="write icon"></i> Angebot bearbeiten
+      </button>
+      <button class="ui red labeled icon button"
+              (click)="removeOffer()">
+        <i class="remove icon"></i> Angebot löschen
+      </button>
+    </div>
+
+
+    <a *ngIf="!isLoggedIn()" routerLink="/login" class="big ui orange button">
+      Zum LogIn <i class="arrow right icon"></i>
+    </a>
+
+
+  </div>
+</div>

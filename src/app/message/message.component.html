@@ -1,0 +1,21 @@
+<div class="ui floating message"><p></p>
+  <div class="header">
+    <p class="messagetext">{{message?.text}}</p>
+  </div>
+  <div class="ui grid">
+    <div class="twelve wide column">
+        <p>Erstellt von: {{user.firstName}} {{user.lastName}}<br>Bezüglich Angebot: {{offer?.title}}</p>
+    </div>
+    <div class="four wide column">
+      <button *ngIf="currentuser.role === 1" class="ui orange button" [routerLink]="['/admin', offer?.id]"> Angebot
+        anpassen
+      </button>
+
+      <button *ngIf="currentuser.role === 0 && currentuser.id === user.id" class="ui compact red icon button"
+              (click)="removeMessage()">
+        <i class="trash alternate icon"></i>
+      </button>
+    </div>
+  </div>
+</div>
+

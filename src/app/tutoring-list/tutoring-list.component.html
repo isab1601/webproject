@@ -1,0 +1,21 @@
+<div class="banneroffers">
+</div>
+
+<div class="tutoringbody">
+  <div class="ui container">
+    <div *ngIf="subject">
+      <h2>Nachhilfeangebote zum Fach "{{subject.title}}"</h2>
+    </div>
+    <div class="ui middle aligned selection celled list">
+      <a *ngFor="let offer of subject.offers" class="item bs-tutoring-list-item"
+         [offer]="offer" [routerLink]="offer.id.toString()"></a>
+      <div *ngIf="!subject.offers" class="ui active dimmer">
+        <div class="ui large text loader">Daten werden geladen...</div>
+      </div>
+      <p *ngIf="subject.offers && !subject.offers.length">Derzeit sind keine Nachhilfeangebote für das
+        Fach {{subject.title}} vorhanden.</p>
+    </div>
+    <button [routerLink]="'..'" class="ui orange button">Zurück zur Fächerübersicht</button>
+  </div>
+  <div class="space"></div>
+</div>

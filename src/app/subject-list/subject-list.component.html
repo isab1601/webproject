@@ -1,0 +1,24 @@
+<div class="banneroffers">
+</div>
+
+<div class="tutoringbody">
+  <div class="ui container">
+    <h2>KWM-Fächer</h2>
+    <div class="ui cards">
+      <div *ngFor="let subject of subjects" class="card">
+        <div class="content">
+          <div class="header">
+            {{ subject.title }}
+          </div>
+          <div class="description">
+            {{ subject.description }}
+          </div>
+        </div>
+        <div [routerLink]="subject.id.toString()" class="ui one orange button">
+          Angebote ansehen
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="space"></div>
+</div>

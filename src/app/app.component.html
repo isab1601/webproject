@@ -1,0 +1,11 @@
+<div class="container">
+  <div class=" ui {{isLoggedIn()?'five':'four'}} item tabs inverted menu">
+    <a routerLink="home" routerLinkActive="active" class=" orange item ">Home</a>
+    <a routerLink="subjects" routerLinkActive="active" class=" orange item">Nachhilfeangebote</a>
+    <a *ngIf="isLoggedIn()" routerLink="personalspace" routerLinkActive="active"
+       class=" orange item">Persönlicher Bereich</a>
+    <a routerLink="login" routerLinkActive="active"
+       class="orange item">{{getLoginLabel()}}</a>
+  </div>
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,127 @@
+/* You can add global styles to this file, and also import other style files */
+.container{
+  width: 100%;
+}
+.tutoringbody{
+  margin: 100px;
+}
+.userinfo{
+  margin-top: 20px;
+}
+
+.newoffer{
+  margin-top: 20px;
+}
+
+.messagetext{
+  margin-bottom: 20px;
+}
+
+.none{
+  padding: 10px;
+}
+
+.appointments{
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 40px;
+}
+.cont{
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+.ui .one .orange .button{
+  margin: 10px;
+}
+
+.huge .ui .orange .button{
+  margin-top: 10px;
+}
+
+.round{
+  width: 300px;
+  height: 300px;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  margin-right: 40px;
+}
+
+.round2{
+  width: 250px;
+  border: solid orange;
+}
+
+.pending{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.activities{
+  margin-bottom: 5px;
+}
+
+
+.tutoringbody{
+  margin-top: 60px;
+}
+
+.header{
+  margin-bottom: 20px;
+  font-size: 14pt;
+}
+
+.description{
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.ui .container{
+  margin: 100px;
+}
+
+
+.banner {
+  background-image:
+    url(/assets/images/banner.jpeg);
+  background-size:cover;
+  margin-bottom: 30px;
+  height: 40%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bannerlogin {
+  background-image:
+    url(/assets/images/img3.jpeg);
+  background-size:cover;
+  margin-bottom: 30px;
+  height: 20%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banneroffers {
+  background-image:
+    url(/assets/images/img5.jpeg);
+  background-size:cover;
+  margin-bottom: 30px;
+  height: 20%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.space{
+  margin-bottom: 500px;
+}
+
+h1{
+  align: center;
+  background-color: white;
+  padding: 10px;
+}

@@ -1,0 +1,22 @@
+<div class="item">
+  <p></p>
+  <i class="calendar outline icon"></i>
+  <div class="content">
+    <p>Datum: {{appointment?.date | date: 'dd.MM.yyyy'}} <br/> Uhrzeit:
+      Von {{appointment?.from  | date:'shortTime'}} Uhr bis {{appointment?.to  | date:'shortTime' }} Uhr </p>
+  </div>
+  <div *ngIf="isLoggedIn() && user.role === 1 && user.id === offer.user_id" class="right floated column">
+  <button class="ui compact red icon button" (click)="removeAppointment()">
+    <i class="trash alternate icon"></i>
+  </button>
+  </div>
+  <div *ngIf="isLoggedIn() && user.role === 0" class="right floated content">
+    <button *ngIf="!appointment?.user_id" class="ui green button" (click)="bookAppointment(appointment)"><i
+      class="calendar outline icon"></i>Termin buchen
+    </button>
+    <p *ngIf="appointment?.user_id && appointment?.user_id !== user.id" class="ui negative floating message">
+      Termin nicht mehr verfügbar</p>
+    <p *ngIf="appointment?.user_id && appointment?.user_id === user.id" class="ui positive floating message">
+      Termin ist von dir gebucht</p>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<div class="banner">
+    <h1>Willkommen bei der KWM Nachhilfebörse</h1>
+</div>
+<div class="tutoringbody">
+<div class="ui container">
+  <h3 *ngIf="!isLoggedIn()">Schön, dass du uns besuchst! Finde jetzt die passende Unterstützung für dein Studium.</h3>
+  <h3 *ngIf="isLoggedIn() && user.role === 0">Schön, dass du uns besuchst {{user.firstName}}! Finde jetzt die passende Unterstützung für dein Studium.</h3>
+  <h3 *ngIf="isLoggedIn() && user.role === 1">Willkommen auf unserer Plattform {{user.firstName}}! Stöbere durch die Angebote oder verwalte deine eigenen.</h3>
+  <a routerLink="../subjects" class="huge ui orange button">
+    Zu den Nachhilfeangeboten <i class="arrow right icon"></i>
+  </a>
+
+</div>
+</div>
+
+</html>
+

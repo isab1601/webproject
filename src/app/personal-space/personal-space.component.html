@@ -1,0 +1,139 @@
+<div class="banneroffers">
+</div>
+
+<div class="tutoringbody">
+  <div class="ui container">
+    <h2 *ngIf="user.role === 0">Persönlicher Bereich für Studierende</h2>
+    <h2 *ngIf="user.role === 1">Persönlicher Bereich für Tutoren</h2>
+    <h3>Willkommen {{user.firstName}}!</h3>
+
+    <div class="cont">
+      <div class="ui grid">
+        <div class="eleven wide column">
+          <div class="ui piled segment">
+            <h4 class="ui header">Deine Beschreibung:</h4>
+            <p>{{user.information}}</p>
+            <h4 class="ui header">Deine Kontaktdaten:</h4>
+            <p>E-Mail:{{user.email}}</p>
+            <p>Telefonnummer:{{user.phonenumber}}</p>
+          </div>
+        </div>
+        <div class="four wide column">
+          <figure>
+            <img class="round2" src="{{user.url}}">
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="user.role === 1" class="ui segment">
+      <h2 class="ui left floated header">Aktivitäten</h2>
+      <div class="ui clearing divider"></div>
+
+
+      <div class="ui grid">
+
+        <div class="eight wide column">
+          <h3><i class="calendar outline icon"></i>Anstehende Nachhilfe-Termine:</h3>
+          <div *ngFor="let offer of  offers">
+            <div *ngFor="let appointment of offer.appointments">
+              <div class="activities">
+                <div *ngIf="isPending(appointment.date) && appointment.user_id" class="ui green segment">
+                  <p></p>
+                  <div class="item">
+                    <p><b>Angebot: {{offer.title}}</b></p>
+                    <div class="content">
+                      <p>Datum: {{appointment.date | date: 'dd.MM.yyyy'}} <br/> Uhrzeit:
+                        Von {{appointment.from  | date:'shortTime'}} Uhr bis {{appointment.to  | date:'shortTime' }} Uhr
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="eight wide column">
+          <h3><i class="envelope icon"></i>Anfragen zu Angeboten:</h3>
+
+          <div *ngFor="let offer of  offers" class="item">
+            <div class="ui middle aligned divided list">
+              <div *ngFor="let message of offer.messages" class="item bs-message"
+                   [message]="message" [offer]="offer"></div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div *ngIf="user.role === 1" class="ui segment">
+      <h2 class="ui left floated header">Meine Angebote</h2>
+      <div class="ui clearing divider"></div>
+      <div class="ui middle aligned selection celled list">
+        <a *ngFor="let offer of user.offers" class="item bs-tutoring-list-item"
+           [offer]="offer" [routerLink]="offer.id.toString()"></a>
+        <div *ngIf="!user.offers" class="ui active dimmer">
+          <div class="ui large text loader">Daten werden geladen...</div>
+        </div>
+        <p *ngIf="user.offers && !user.offers.length">Derzeit wurden noch keine Angebote erstellt</p>
+      </div>
+
+      <div class="newoffer">
+        <button *ngIf="user.role === 1" class="huge ui orange button"
+                [routerLink]="['/admin']">Neues Angebot erstellen
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="user.role === 0">
+
+      <h3>Anstehende Termine:</h3>
+      <p>Friendly reminder: Diese Nachhilfetermine sind noch ausständig.</p>
+      <div class="pending">
+        <div class="ui grid">
+          <div *ngFor="let appointment of appointments">
+            <div class="fourwide column">
+              <div *ngIf="isPending(appointment.date)" class="ui green floating message">
+                <div class="header">
+                  {{ appointment.offer?.title }}
+                </div>
+                <p>Dein Termin: {{ appointment.date | date: 'dd.MM.yyyy' }}
+                  <br>Von: {{appointment.from  | date:'shortTime'}} bis {{appointment.to  | date:'shortTime' }} Uhr</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Gebuchte Nachhilfetermine:</h3>
+      <p>Überblick über alle von dir gebuchten Termine</p>
+      <div class="ui cards">
+        <div *ngFor="let appointment of appointments" class="card">
+          <div class="content">
+            <div class="header">
+              {{ appointment.offer?.title }}
+            </div>
+            <div class="description">
+              <p>Dein Termin:
+                {{ appointment.date | date: 'dd.MM.yyyy' }}</p>
+              <p>Von: {{appointment.from  | date:'shortTime'}} bis {{appointment.to  | date:'shortTime' }} Uhr</p>
+            </div>
+          </div>
+          <div [routerLink]="appointment.offer.id.toString()" class="ui one orange button">
+            Details zum Angebot
+          </div>
+        </div>
+        <div *ngIf="!appointments" class="ui active dimmer">
+          <div class="ui large text loader">Daten werden geladen...</div>
+        </div>
+        <div class="none">
+          <p *ngIf="appointments && !appointments.length">Derzeit hast du noch keine Nachhilfeangebote gebucht</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

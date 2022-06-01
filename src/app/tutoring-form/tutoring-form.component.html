@@ -1,0 +1,65 @@
+<div class="tutoringbody">
+  <div class="ui container">
+    <h2>Angebot erstellen</h2>
+    <form class="ui large form" [formGroup]="tutoringForm"
+          (ngSubmit)="submitForm()">
+      <input type="hidden" formControlName="id">
+
+      <div class="field">
+        <label>Angebotstitel</label>
+        <input formControlName="title">
+        <div *ngIf="errors['title']" class="ui negative message"> {{
+          errors['title'] }} </div>
+      </div>
+
+      <div class="field">
+        <label>Beschreibung</label>
+        <textarea formControlName="description" rows="3"></textarea>
+        <div *ngIf="errors['description']" class="ui negative message"> {{
+          errors['description'] }} </div>
+      </div>
+      <div class="field">
+        <label>Fach</label>
+        <select formControlName="subject_id">
+          <option disabled selected value="-1">Bitte wählen ...</option>
+          <option *ngFor="let subject of subjects" [value]="subject.id">{{subject.title}}</option>
+        </select>
+        <div *ngIf="errors['subject_id']" class="ui negative message"> {{
+          errors['subject_id'] }} </div>
+      </div>
+      <div class="field">
+        <label>Termine</label>
+        <div formArrayName="appointments" class="appointments">
+          <!--eindeutigen Index für Einträgegenerieren !-->
+          <div class="fields" *ngFor="let control of appointments?.controls; index
+         as i; last as l" [formGroupName]="i">
+            <input type="hidden" formControlName="id">
+            <label>Datum:</label>
+            <div class="six wide field">
+              <input type="date" formControlName="date">
+            </div>
+            <label>Von:</label>
+            <div class="six wide field">
+              <input type="datetime-local" formControlName="from">
+            </div>
+            <label>Bis:</label>
+            <div class="six wide field">
+              <input type="datetime-local" formControlName="to">
+            </div>
+            <div class="one wide field" *ngIf="l">
+              <button (click)="addDatesControl()" class="ui large button"
+                      type="button">+
+              </button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="errors['dates']" class="ui negative message">{{
+          errors['dates'] }}</div>
+      </div>
+      <button type="submit" class="ui green button"
+              [disabled]="tutoringForm.invalid">Speichern
+      </button>
+      <button [routerLink]="'/personalspace'" class="ui orange button">Abbrechen</button>
+    </form>
+  </div>
+</div>
